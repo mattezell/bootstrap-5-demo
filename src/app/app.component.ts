@@ -18,10 +18,15 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.dialogElRef.nativeElement.addEventListener('hide.bs.modal', (event: any) => {
       this.processDialogEvent(event);
+      // This is where we handle closing via clicking outside of the modal...
     });
     this.dialogElRef.nativeElement.addEventListener('show.bs.modal', (event: any) => {
       this.processDialogEvent(event);
     });
+  }
+
+  userRocks(likesToRock: boolean) {
+    console.log(`User likes to rock: ${likesToRock}`);
   }
 
   openModal() {
