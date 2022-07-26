@@ -7,11 +7,18 @@ import { Modal } from 'bootstrap';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, AfterViewInit {
+
+  private confirmDialog!: Modal;
+
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
+
   ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
+  }
+
+  openModal(confirmationDialog: HTMLElement) {
+    this.confirmDialog = new Modal(confirmationDialog);
+    this.confirmDialog.show();
   }
   title = 'bootstrap-5-demo';
 }
