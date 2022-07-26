@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Modal } from 'bootstrap';
 
 @Component({
@@ -10,15 +10,26 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   private confirmDialog!: Modal;
 
+  @ViewChild('confirmationDialog', {static: true}) dialogElRef!: ElementRef;
+
   ngOnInit(): void {
   }
 
   ngAfterViewInit(): void {
+    this.dialogElRef.nativeElement.addEventListener('hide.bs.modal', (event: any) => {
+      this.processDialogEvent(event);
+    });
+    this.dialogElRef.nativeElement.addEventListener('show.bs.modal', (event: any) => {
+      this.processDialogEvent(event);
+    });
   }
 
-  openModal(confirmationDialog: HTMLElement) {
-    this.confirmDialog = new Modal(confirmationDialog);
+  openModal() {
+    this.confirmDialog = new Modal(this.dialogElRef.nativeElement);
     this.confirmDialog.show();
   }
-  title = 'bootstrap-5-demo';
+
+  private processDialogEvent(evt: Event) {
+    console.log(`${evt.type}`);
+  }
 }
