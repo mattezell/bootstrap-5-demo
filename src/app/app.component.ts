@@ -27,6 +27,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   userRocks(likesToRock: boolean) {
     console.log(`User likes to rock: ${likesToRock}`);
+    this.confirmDialog.hide();
   }
 
   openModal() {
